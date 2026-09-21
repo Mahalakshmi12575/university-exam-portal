@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>University Examination Results</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #ffffff;
+            color: #111;
+        }
+
+        /* ================= HEADER ================= */
+
+        .header {
+            background: white;
+            border-bottom: 3px solid #35b3b3;
+            min-height: 115px;
+            position: relative;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .university-logo {
+            position: absolute;
+            left: 8%;
+            top: 10px;
+            width: 90px;
+            height: 90px;
+            object-fit: contain;
+        }
+
+        .coe-logo {
+            position: absolute;
+            right: 8%;
+            top: 10px;
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+        }
+
+        .header-text {
+            text-align: center;
+        }
+
+        .header-text h1 {
+            margin: 0;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 32px;
+            font-weight: bold;
+        }
+
+        .header-text h2 {
+            margin: 2px 0;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 19px;
+        }
+
+        .header-text p {
+            margin: 0;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        /* ================= HOME PAGE ================= */
+
+        .home-page {
+            min-height: calc(100vh - 115px);
+            background: #ffffff;
+            padding-top: 20px;
+        }
+
+        .welcome-banner {
+            background: #39b3b3;
+            color: white;
+            max-width: 950px;
+            margin: 0 auto;
+            padding: 35px 20px;
+            text-align: center;
+        }
+
+        .welcome-banner h2 {
+            margin: 0 0 10px;
+            font-size: 30px;
+        }
+
+        .welcome-banner p {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        /* ================= LOGIN ================= */
+
+        .login-box {
+            width: 390px;
+            max-width: 90%;
+            margin: 35px auto;
+            background: #333333;
+            color: white;
+            padding: 25px 30px 30px;
+            border-radius: 5px;
+        }
+
+        .login-box h2 {
+            text-align: center;
+            color: #70d1d1;
+            margin-top: 0;
+        }
+
+        label {
+            display: block;
+            margin-top: 18px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-top: 7px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 16px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #35b3b3;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 25px;
+            padding: 13px;
+            background: #35b3b3;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 17px;
+            border-radius: 3px;
+        }
+
+        button:hover {
+            background: #258f8f;
+        }
+
+        /* ================= RESULT PAGE ================= */
+
+        #resultPage {
+            display: none;
+            min-height: 100vh;
+            background: #b9e3e3;
+            padding-bottom: 50px;
+        }
+
+        .result-container {
+            width: 95%;
+            max-width: 1050px;
+            margin: 0 auto;
+            padding-top: 25px;
+        }
+
+        .student-welcome {
+            font-size: 20px;
+            margin: 5px 0 60px;
+        }
+
+        .result-title {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 45px;
+        }
+
+        .student-details {
+            background: transparent;
+            border: 1px solid #777;
+            padding: 12px;
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+
+        .student-details p {
+            margin: 6px 0;
+            text-align: left;
+            line-height: 1.4;
+        }
+
+        .detail-label {
+            display: inline-block;
+            width: 190px;
+            font-weight: bold;
+        }
+
+        /* ================= RESULT TABLE ================= */
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: transparent;
+        }
+
+        th,
+        td {
+            border: 1px solid #777;
+            padding: 9px;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        th {
+            font-weight: bold;
+            background: #1f7777;
+            colour: white;
+        }
+
+        .pass {
+            color: green;
+            font-weight: bold;
+        }
+
+        .ra {
+            color: red;
+            font-weight: bold;
+        }
+
+        .logout-button {
+            width: 150px;
+            display: block;
+            margin: 30px auto;
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 700px) {
+
+            .header {
+                min-height: 150px;
+            }
+
+            .university-logo {
+                left: 10px;
+                width: 65px;
+                height: 65px;
+            }
+
+            .coe-logo {
+                right: 10px;
+                width: 60px;
+                height: 60px;
+            }
+
+            .header-text h1 {
+                font-size: 21px;
+            }
+
+            .header-text h2 {
+                font-size: 14px;
+            }
+
+            .header-text p {
+                font-size: 12px;
+            }
+
+            .welcome-banner h2 {
+                font-size: 22px;
+            }
+
+            .welcome-banner p {
+                font-size: 15px;
+            }
+
+            .result-title {
+                font-size: 24px;
+            }
+
+            th,
+            td {
+                padding: 7px 3px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- ===================================================== -->
+<!-- HOME / LOGIN PAGE -->
+<!-- ===================================================== -->
+
+<div id="homePage">
+
+    <header class="header">
+
+        <!-- Anna University Logo -->
+        <img
+            src="images/anna-logo.jpeg"
+            class="university-logo"
+            alt="Anna University Logo"
+        >
+
+        <!-- COE Logo -->
+        <img
+            src="images/coe-logo.jpeg"
+            class="coe-logo"
+            alt="Controller of Examinations Logo"
+        >
+
+        <div class="header-text">
+            <h1>Anna University, Chennai</h1>
+            <h2>Office of the Controller of Examinations</h2>
+            <p>Pre-Examination Monitoring System</p>
+        </div>
+
+    </header>
+
+
+    <main class="home-page">
+
+        <div class="welcome-banner">
+            <h2>Welcome to Examination Results Portal</h2>
+            <p>Enter your Register Number and Date of Birth</p>
+        </div>
+
+
+        <div class="login-box">
+
+            <h2>Student Login</h2>
+
+            <label for="registerNumber">
+                Register Number
+            </label>
+
+            <input
+                type="text"
+                id="registerNumber"
+                placeholder="Enter Register Number"
+            >
+
+
+            <label for="dob">
+                Date of Birth
+            </label>
+
+            <!-- DD/MM/YYYY format -->
+            <input
+                type="text"
+                id="dob"
+                placeholder="DD/MM/YYYY"
+                maxlength="10"
+                oninput="formatDOB(this)"
+            >
+
+
+            <button onclick="showResult()">
+                View Result
+            </button>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<!-- ===================================================== -->
+<!-- RESULT PAGE -->
+<!-- ===================================================== -->
+
+<div id="resultPage">
+
+    <header class="header">
+
+        <img
+            src="images/anna-logo.jpeg"
+            class="university-logo"
+            alt="Anna University Logo"
+        >
+
+        <img
+            src="images/coe-logo.jpeg"
+            class="coe-logo"
+            alt="Controller of Examinations Logo"
+        >
+
+        <div class="header-text">
+            <h1>Anna University, Chennai</h1>
+            <h2>Office of the Controller of Examinations</h2>
+            <p>Pre-Examination Monitoring System</p>
+        </div>
+
+    </header>
+
+
+    <div class="result-container">
+
+        <div class="student-welcome">
+            Welcome <span id="studentName">AJAAI SHARGHAR K M.</span> !!
+        </div>
+
+
+        <h1 class="result-title">
+            Result for April / May Examination,2026
+        </h1>
+
+
+        <!-- Student Information -->
+
+        <div class="student-details">
+
+    <p>
+        <span class="detail-label">Register Number :</span>
+        <span id="displayReg">830122103002</span>
+    </p>
+
+    <p>
+        <span class="detail-label">Name :</span>
+        <span id="displayName">AJAAI SHARGHAR K M.</span>
+    </p>
+
+    <p>
+        <span class="detail-label">Branch :</span>
+        <span>B.E. Civil Engineering</span>
+    </p>
+
+</div>
+
+
+        <!-- RESULT TABLE -->
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Semester</th>
+                    <th>Subject Code</th>
+                    <th>Grade</th>
+                    <th>Result</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <!-- Semester 08 -->
+
+                <tr>
+                    <td>08</td>
+                    <td>CE3811</td>
+                    <td>A+</td>
+                    <td class="pass">PASS</td>
+                </tr>
+
+
+                <!-- Semester 07 -->
+
+                <tr>
+                    <td>07</td>
+                    <td>AI3404</td>
+                    <td>U</td>
+                    <td class="ra">RA</td>
+                </tr>
+
+                <tr>
+                    <td>07</td>
+                    <td>CE3701</td>
+                    <td>U</td>
+                    <td class="ra">RA</td>
+                </tr>
+
+                <tr>
+                    <td>07</td>
+                    <td>GE3752</td>
+                    <td>B+</td>
+                    <td class="pass">PASS</td>
+                </tr>
+
+                <tr>
+                    <td>07</td>
+                    <td>OIM351</td>
+                    <td>U</td>
+                    <td class="ra">RA</td>
+                </tr>
+
+
+                <!-- Semester 06 -->
+
+                <tr>
+                    <td>06</td>
+                    <td>AG3601</td>
+                    <td>B</td>
+                    <td class="pass">PASS</td>
+                </tr>
+
+
+                <!-- Semester 05 -->
+
+                <tr>
+                    <td>05</td>
+                    <td>CE3013</td>
+                    <td>UA</td>
+                    <td class="ra">RA</td>
+                </tr>
+
+                <tr>
+                    <td>05</td>
+                    <td>CE3501</td>
+                    <td>B</td>
+                    <td class="pass">PASS</td>
+                </tr>
+
+                <tr>
+                    <td>05</td>
+                    <td>CE3503</td>
+                    <td>B+</td>
+                    <td class="pass">PASS</td>
+                </tr>
+
+
+                <!-- Semester 04 -->
+
+                <tr>
+                    <td>04</td>
+                    <td>CE3401</td>
+                    <td>UA</td>
+                    <td class="ra">RA</td>
+                </tr>
+
+                <tr>
+                    <td>04</td>
+                    <td>CE3402</td>
+                    <td>B+</td>
+                    <td class="pass">PASS</td>
+                </tr>
+
+                <tr>
+                    <td>04</td>
+                    <td>CE3404</td>
+                    <td>U</td>
+                    <td class="ra">RA</td>
+                </tr>
+
+
+                <!-- Semester 03 -->
+
+                <tr>
+                    <td>03</td>
+                    <td>CE3301</td>
+                    <td>U</td>
+                    <td class="ra">RA</td>
+                </tr>
+
+                <tr>
+                    <td>03</td>
+                    <td>CE3303</td>
+                    <td>B</td>
+                    <td class="pass">PASS</td>
+                </tr>
+
+                <tr>
+                    <td>03</td>
+                    <td>CE3351</td>
+                    <td>UA</td>
+                    <td class="ra">RA</td>
+                </tr>
+
+
+                <!-- Semester 02 -->
+
+                <tr>
+                    <td>02</td>
+                    <td>BE3252</td>
+                    <td>B+</td>
+                    <td class="pass">PASS</td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+
+        <button
+            class="logout-button"
+            onclick="logout()"
+        >
+            Back
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ===================================================== -->
+<!-- JAVASCRIPT -->
+<!-- ===================================================== -->
+
+<script>
+
+    /*
+       Automatically formats the DOB as DD/MM/YYYY
+       while the user types.
+    */
+
+    function formatDOB(input) {
+
+        let value = input.value.replace(/\D/g, "");
+
+        if (value.length > 8) {
+            value = value.substring(0, 8);
+        }
+
+        if (value.length >= 5) {
+
+            input.value =
+                value.substring(0, 2) +
+                "/" +
+                value.substring(2, 4) +
+                "/" +
+                value.substring(4, 8);
+
+        } else if (value.length >= 3) {
+
+            input.value =
+                value.substring(0, 2) +
+                "/" +
+                value.substring(2);
+
+        } else {
+
+            input.value = value;
+
+        }
+    }
+
+
+    /*
+       Show Result
+    */
+
+    function showResult() {
+
+        const registerNumber =
+            document.getElementById("registerNumber").value.trim();
+
+        const dob =
+            document.getElementById("dob").value.trim();
+
+
+        if (registerNumber === "") {
+
+            alert("Please enter Register Number.");
+
+            return;
+        }
+
+
+        if (dob === "") {
+
+            alert("Please enter Date of Birth.");
+
+            return;
+        }
+
+
+        /*
+           Check DD/MM/YYYY format
+        */
+
+        const dobPattern =
+            /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
+
+
+        if (!dobPattern.test(dob)) {
+
+            alert("Please enter Date of Birth in DD/MM/YYYY format.");
+
+            return;
+        }
+
+
+        /*
+           Display register number
+        */
+
+        document.getElementById("displayReg").textContent =
+            registerNumber;
+
+
+        /*
+           Show result page
+        */
+
+        document.getElementById("homePage").style.display =
+            "none";
+
+        document.getElementById("resultPage").style.display =
+            "block";
+
+        window.scrollTo(0, 0);
+    }
+
+
+    /*
+       Back to Login Page
+    */
+
+    function logout() {
+
+        document.getElementById("resultPage").style.display =
+            "none";
+
+        document.getElementById("homePage").style.display =
+            "block";
+
+        document.getElementById("registerNumber").value = "";
+        document.getElementById("dob").value = "";
+
+        window.scrollTo(0, 0);
+    }
+
+</script>
+
+</body>
+</html>
