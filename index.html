@@ -183,7 +183,7 @@
 
         .student-details {
             background: transparent;
-            border: 1px solid #777;
+            border: none;
             padding: 12px;
             font-size: 17px;
             font-weight: bold;
@@ -199,6 +199,12 @@
         .detail-label {
             display: inline-block;
             width: 210px;
+            font-weight: bold;
+        }
+
+        .detail-colon {
+            display: inline-block;
+            width: 20px;
             font-weight: bold;
         }
 
@@ -419,18 +425,23 @@
 
         <div class="student-details">
 
+    <div class="student-details">
+
     <p>
-        <span class="detail-label">Register Number :</span>
+        <span class="detail-label">Register Number</span>
+        <span class="detail-colon">:</span>
         <span id="displayReg">830122103002</span>
     </p>
 
     <p>
-        <span class="detail-label">Name :</span>
-        <span id="displayName">AJAAI SHARGHAR K M.</span>
+        <span class="detail-label">Name</span>
+        <span class="detail-colon">:</span>
+        <span id="displayName">AJAAI SHARGHAR K M</span>
     </p>
 
     <p>
-        <span class="detail-label">Branch :</span>
+        <span class="detail-label">Branch</span>
+        <span class="detail-colon">:</span>
         <span>B.E. Civil Engineering</span>
     </p>
 
